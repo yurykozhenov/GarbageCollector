@@ -77,6 +77,10 @@ public class Player : MonoBehaviour
     {
         Instantiate(muzzleFlash, muzzleFlashPoint.position, transform.rotation);
         Instantiate(projectile, shotPoint.position, transform.rotation);
+        // TODO: Add weapon variations
+//        Instantiate(projectile, shotPoint.position, transform.rotation * Quaternion.Euler(0, 0, 15));
+//        Instantiate(projectile, shotPoint.position, transform.rotation * Quaternion.Euler(0, 0, -15));
+
         timeToNextShot = fireRate;
         animator.SetTrigger("Shoot");
         audioSource.Play();

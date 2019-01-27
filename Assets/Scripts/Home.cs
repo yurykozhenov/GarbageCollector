@@ -8,6 +8,8 @@ public class Home : MonoBehaviour
 
     int currentHealth;
     GameController gameController;
+
+    AudioSource audioSource;
     
     public void TakeDamage(int damage)
     {   
@@ -18,10 +20,15 @@ public class Home : MonoBehaviour
         {
             gameController.GameOver();
         }
+        
+        Camera.main.gameObject.GetComponent<Animator>().SetTrigger("Shake");
+        audioSource.Play();
     }
     
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        
         currentHealth = maxHealth;
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }

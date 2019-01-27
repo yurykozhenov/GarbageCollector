@@ -36,9 +36,25 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        if (gameOver) return;
+        
         gameOverText.SetActive(true);
         gameOver = true;
         restartButton.SetActive(true);
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>().enabled = false;
+
+        var highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+        if (score > highScore)
+        {
+            gameOverText.GetComponent<Text>().text += "\nYou got a new high score!";
+            PlayerPrefs.SetInt("HighScore", score);
+        }
+        else
+        {
+            gameOverText.GetComponent<Text>().text += $"\nYour high score: {highScore}";
+        }     
     }
 
     public void RestartGame()
@@ -56,7 +72,7 @@ public class GameController : MonoBehaviour
             {
                 var garbageItem = garbage[Random.Range(0, garbage.Length)];
                 Instantiate(garbageItem, DetermineSpawnPosition(), Quaternion.identity);
-                yield return new WaitForSeconds(spawnWait);
+                yield return new WaitForSeconds(spawnWait + Random.Range(-1f, 1f));
             }
 
             yield return new WaitForSeconds(waveWait);
