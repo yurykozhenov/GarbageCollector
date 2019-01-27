@@ -72,6 +72,7 @@ public class GameController : MonoBehaviour
             {
                 var garbageItem = garbage[Random.Range(0, garbage.Length)];
                 Instantiate(garbageItem, DetermineSpawnPosition(), Quaternion.identity);
+                // TODO: Set range in Unity as two variables
                 yield return new WaitForSeconds(spawnWait + Random.Range(-1f, 1f));
             }
 

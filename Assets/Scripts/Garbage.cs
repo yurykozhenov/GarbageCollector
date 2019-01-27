@@ -15,17 +15,18 @@ public class Garbage : MonoBehaviour
         audioSource = GetComponent<AudioSource>();        
         
         homeTransform = GameObject.FindWithTag("Home").GetComponent<Transform>();
-        rotationDirection = new Vector3(0f, 0f, Random.Range(-3.0f, 3.0f));
+        rotationDirection = new Vector3(0f, 0f, Random.Range(-2.0f, 2.0f) * 3);
     }
 
     void Update()
     {
         transform.Rotate(rotationDirection);
         
+        // TODO: Set range in Unity as two variables
         transform.position = Vector2.MoveTowards(
             transform.position,
             homeTransform.position,
-            speed * Time.deltaTime
+            Random.Range(speed - 2, speed + 2) * Time.deltaTime
         );
     }
 
