@@ -12,15 +12,16 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (!other.isTrigger)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         // TODO: Check by tag or layer
         if (other.GetComponent<DestroyedGarbage>()) return;
         
         Instantiate(destroyEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-    }
-
-    void OnCollisionEnter2D(Collision2D other)
-    {
         Destroy(gameObject);
     }
 }
